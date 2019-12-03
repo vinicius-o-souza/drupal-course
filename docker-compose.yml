@@ -1,0 +1,21 @@
+web:  
+  build: .
+  ports:
+    - "8080:80"
+    - "22022:22"
+  links: 
+    - mysql:mysql
+    - memcached:memcached
+  volumes:
+    - ./drupal:/var/www/html:rw
+
+mysql:  
+  image: mysql
+  expose:
+    - "3306"
+  environment:
+    MYSQL_DATABASE: drupal_7
+    MYSQL_ROOT_PASSWORD: root
+
+memcached:  
+  image: memcached
